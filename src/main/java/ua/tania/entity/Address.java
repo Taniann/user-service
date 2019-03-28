@@ -1,8 +1,10 @@
 package ua.tania.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Tania Nebesna on 27.03.2019
@@ -10,7 +12,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "address")
-public class Address {
+public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
@@ -22,8 +24,8 @@ public class Address {
     @Column(name = "street", nullable = false)
     private String street;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    @OneToOne(mappedBy = "address")
     private User user;
 
 }

@@ -1,9 +1,12 @@
 package ua.tania.dto;
 
 import com.sun.istack.internal.NotNull;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ua.tania.entity.Address;
 import ua.tania.entity.Role;
+import ua.tania.entity.User;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
@@ -31,4 +34,15 @@ public class UserDto {
 
     @NotNull
     private List<Role> roles;
+
+    public static UserDto toUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setAddress(user.getAddress());
+        userDto.setRoles(user.getRoles());
+
+        return userDto;
+    }
+
 }

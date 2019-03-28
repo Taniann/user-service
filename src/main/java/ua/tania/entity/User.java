@@ -24,10 +24,8 @@ public class User implements Serializable {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-/*    @Column(name = "password", nullable = false)
-    private String password;*/
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
